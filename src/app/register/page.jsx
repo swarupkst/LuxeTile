@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 
+export const metadata = {
+  title: "Register for LuxeTile",
+  description: "Register to continue exploring LuxeTile",
+};
+
 export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">

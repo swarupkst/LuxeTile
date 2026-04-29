@@ -1,5 +1,10 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "Ceramic Blue Tile",
+  description: "Premium ceramic tile with a beautiful blue glaze finish. Perfect for modern spaces.",
+};
+
 const getTileDetails = async (id) => {
   return {
     id,
