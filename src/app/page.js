@@ -92,7 +92,7 @@ export default async function HomePage() {
                   alt={tile.title} 
                   className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" 
                 />
-                <div className="absolute top-4 left-4 badge badge-success">{tile.category}</div>
+                <div className="absolute top-4 left-4 badge badge-success font-semibold">{tile.category}</div>
               </figure>
               
               <div className="card-body">

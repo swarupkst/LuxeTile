@@ -1,12 +1,40 @@
+'use client'
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 
-export const metadata = {
-  title: "Register for LuxeTile",
-  description: "Register to continue exploring LuxeTile",
-};
+// export const metadata = {
+//   title: "Register for LuxeTile",
+//   description: "Register to continue exploring LuxeTile",
+// };
 
 export default function RegisterPage() {
+  
+  const {register, handleSubmit, formState: {errors}} = useForm()
+  
+      const handleLoginFunc = async (data) => {
+        const {name, email, url, password}=data;
+          console.log (data ,"data")
+          console.log (errors ,"errors")
+
+        const {data: res, error} = await authClient.signUp.email({
+      name: name, // required
+      email: email, // required
+      password: password, // required
+      image: url,
+      callbackURL: "/",
+        })
+        console.log(res)
+        console.log(error);
+        if(error) {
+          alert (error.message)
+        }
+        if(res) {
+          alert ("Signup Successfull")
+        }
+      };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
       
@@ -21,7 +49,7 @@ export default function RegisterPage() {
 
         <div className="bg-base-100 shadow-xl rounded-2xl p-6">
           
-          <form className="space-y-4">
+          <form className="space-y-4"onSubmit={handleSubmit(handleLoginFunc)}>
             
             <div>
               <label className="label-text">Full Name</label>
@@ -29,8 +57,10 @@ export default function RegisterPage() {
                 type="text"
                 placeholder="Swarup Biswas"
                 className="input input-bordered w-full mt-1"
-                required
-              />
+                {...register("name", {required: "Name is required"})}
+                            />
+                            {errors.name && <p className="text-red-700">{errors.name.message}</p>}
+              
             </div>
 
             <div>
@@ -39,8 +69,9 @@ export default function RegisterPage() {
                 type="url"
                 placeholder="https://example.com/photo.jpg"
                 className="input input-bordered w-full mt-1"
-                required
-              />
+                {...register("url", {required: "Photo URL is required"})}
+                            />
+                            {errors.url && <p className="text-red-700">{errors.url.message}</p>}
             </div>
 
             <div>
@@ -49,8 +80,9 @@ export default function RegisterPage() {
                 type="email"
                 placeholder="email@example.com"
                 className="input input-bordered w-full mt-1"
-                required
-              />
+                {...register("email", {required: "Email is required"})}
+                            />
+                            {errors.email && <p className="text-red-700">{errors.email.message}</p>}
             </div>
 
             <div>
@@ -59,8 +91,9 @@ export default function RegisterPage() {
                 type="password"
                 placeholder="********"
                 className="input input-bordered w-full mt-1"
-                required
-              />
+              {...register("password", {required: "Password cann't be Empty"})}
+                            />
+                            {errors.password && <p className="text-red-700">{errors.password.message}</p>}
             </div>
 
             <button className="btn bg-[#19815f] w-full mt-2 text-white hover:">

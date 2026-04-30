@@ -1,12 +1,30 @@
+'use client'
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 
-export const metadata = {
-  title: "Login to LuxeTile",
-  description: "Login to continue exploring LuxeTile",
-};
+// export const metadata = {
+//   title: "Login to LuxeTile",
+//   description: "Login to continue exploring LuxeTile",
+// };
 
 export default function LoginPage() {
+
+    const {register, handleSubmit, formState: {errors}} = useForm()
+
+    const handleLoginFunc = async (data) => {
+
+        console.log (data ,"data")
+        console.log (errors ,"errors")
+
+        const { data: res, error } = await authClient.signIn.email({
+    email: data.email, // required
+    password: data.password, // required
+    // rememberMe: true,
+    callbackURL: "/",
+});
+    }
     return (
         <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
 
@@ -21,7 +39,7 @@ export default function LoginPage() {
 
                 <div className="bg-base-100 shadow-xl rounded-2xl p-6">
 
-                    <form className="space-y-4">
+                    <form className="space-y-4" onSubmit={handleSubmit(handleLoginFunc)}>
 
                         <div>
                             <label className="label-text">Email</label>
@@ -29,8 +47,9 @@ export default function LoginPage() {
                                 type="email"
                                 placeholder="email@example.com"
                                 className="input input-bordered w-full mt-1"
-                                required
+                                {...register("email", {required: "Email is required"})}
                             />
+                            {errors.email && <p className="text-red-700">{errors.email.message}</p>}
                         </div>
 
                         <div>
@@ -39,8 +58,10 @@ export default function LoginPage() {
                                 type="password"
                                 placeholder="••••••••"
                                 className="input input-bordered w-full mt-1"
-                                required
+                                
+                                {...register("password", {required: "Password cann't be Empty"})}
                             />
+                            {errors.password && <p className="text-red-700">{errors.password.message}</p>}
                         </div>
 
                         <div className="text-right text-sm">
