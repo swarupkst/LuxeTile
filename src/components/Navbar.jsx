@@ -1,10 +1,15 @@
 "use client";
-
+import { authClient } from "@/lib/auth-client"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 
 export default function Navbar() {
+  const { data: session } = authClient.useSession()
+  const user = session?.user
+
+  //console.log(user, "user")
+
   const pathname = usePathname();
 
   const isLoggedIn = false;
@@ -80,38 +85,35 @@ export default function Navbar() {
         </div>
 
         {/* Right */}
-        <div className="navbar-end">
-          {isLoggedIn ? (
-            <div className="flex items-center gap-4">
+       <div className="navbar-end flex gap-2">
 
-              {/* Avatar */}
-              <Link
-                href="/my-profile"
-                className="hover:scale-105 transition duration-300"
-              >
-                <div className="avatar">
-                  <div className="w-11 rounded-full ring-2 ring-[#244d3f] ring-offset-2">
-                    <img
-                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                      alt="User"
-                    />
-                  </div>
-                </div>
-              </Link>
+{user ? (
+  <div className="avatar">
+  <div className="w-10 rounded-full">
+    <Link href="/my-profile">
+    <img src={user.image} />
+    </Link>
+  </div>
+</div>
+) : ("")}
+      
+        
+           {user ? ( <Link
+              href="/login"
+              className="btn bg-[#244d3f] hover:bg-[#1d4034] text-white border-none rounded-full px-8 shadow-md"
+            onClick={async() => await authClient.signOut()}
+>
+              Logout
+            </Link>) : (
 
-              {/* Logout Button */}
-              <button className="btn bg-red-500 hover:bg-red-600 text-white border-none rounded-full px-6">
-                Logout
-              </button>
-            </div>
-          ) : (
+
             <Link
               href="/login"
               className="btn bg-[#244d3f] hover:bg-[#1d4034] text-white border-none rounded-full px-8 shadow-md"
             >
               Login
             </Link>
-          )}
+            )}
         </div>
       </div>
     </div>

@@ -1,14 +1,30 @@
+"use client";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function MyProfilePage() {
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    image:
-      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
-    role: "User",
-    joined: "April 2026",
-  };
+
+  const router = useRouter();
+
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+
+    useEffect(() => {
+    if (!isPending && !user) {
+      router.replace("/login");
+    }
+  }, [isPending, user, router]);
+
+
+  if (isPending || !user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-base-200 flex items-center justify-center px-4">
@@ -19,17 +35,19 @@ export default function MyProfilePage() {
 
           <div className="avatar mb-4">
             <div className="w-28 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <img src={user.image} alt={user.name} />
+              <img
+                src={
+                  user?.image ||
+                  "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                }
+                alt="user"
+              />
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold">{user.name}</h2>
-          <p className="text-sm text-gray-500">{user.email}</p>
+          <h2 className="text-2xl font-bold">{user?.name}</h2>
+          <p className="text-sm text-gray-500">{user?.email}</p>
 
-          <div className="flex gap-2 mt-3">
-            <span className="badge badge-success font-semibold">{user.role}</span>
-            <span className="badge badge-outline">Joined {user.joined}</span>
-          </div>
         </div>
 
         <div className="divider my-6"></div>
@@ -38,14 +56,13 @@ export default function MyProfilePage() {
 
           <div className="flex justify-between">
             <span className="text-gray-500">Full Name</span>
-            <span className="font-medium">{user.name}</span>
+            <span className="font-medium">{user?.name}</span>
           </div>
 
           <div className="flex justify-between">
             <span className="text-gray-500">Email</span>
-            <span className="font-medium">{user.email}</span>
+            <span className="font-medium">{user?.email}</span>
           </div>
-
 
         </div>
 
@@ -55,10 +72,9 @@ export default function MyProfilePage() {
             Update Profile Info
           </Link>
 
-          <Link href="/" className="btn btn-outline  w-full">
+          <Link href="/" className="btn btn-outline w-full">
             Back To Home
           </Link>
-
 
         </div>
 
