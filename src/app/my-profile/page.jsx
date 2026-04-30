@@ -51,11 +51,11 @@ export default function MyProfilePage() {
 
         <div className="mt-6 space-y-3">
 
-          <Link href="/my-profile/update" className="btn btn-primary w-full">
+          <Link href="/my-profile/update" className="btn bg-[#19815f] text-white w-full">
             Update Profile Info
           </Link>
 
-          <Link href="/" className="btn btn-soft btn-accent w-full">
+          <Link href="/" className="btn btn-outline  w-full">
             Back To Home
           </Link>
 

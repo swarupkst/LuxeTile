@@ -2,75 +2,118 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
 
 export default function Navbar() {
   const pathname = usePathname();
-  
-  const isLoggedIn = false; 
+
+  const isLoggedIn = false;
+
+  const navItemStyle = (path) =>
+    pathname === path
+      ? "text-white bg-[#244d3f] px-4 py-2 rounded-full font-semibold"
+      : "text-gray-700 hover:text-[#244d3f] transition duration-300 px-4 py-2";
 
   const navLinks = (
     <>
       <li>
-        <Link href="/" className={pathname === "/" ? "active font-bold text-primary" : ""}>
+        <Link href="/" className={navItemStyle("/")}>
           Home
         </Link>
       </li>
+
       <li>
-        <Link href="/all-tiles" className={pathname === "/all-tiles" ? "active font-bold text-primary" : ""}>
+        <Link href="/all-tiles" className={navItemStyle("/all-tiles")}>
           All Tiles
         </Link>
       </li>
 
-        <li>
-          <Link href="/my-profile" className={pathname === "/my-profile" ? "active font-bold text-primary" : ""}>
-            My Profile
-          </Link>
-        </li>
-      
+      <li>
+        <Link href="/my-profile" className={navItemStyle("/my-profile")}>
+          My Profile
+        </Link>
+      </li>
     </>
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-md sticky top-0 z-50 px-4 lg:px-10">
+    <div className="sticky top-0 z-50 backdrop-blur-md bg-white/90 border-b border-gray-200 shadow-sm">
       
-      {/* Left: Website Logo */}
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-            </svg>
+      <div className="navbar  mx-auto px-4 lg:px-8 py-2">
+
+        {/* Left */}
+        <div className="navbar-start">
+
+          {/* Mobile Menu */}
+          <div className="dropdown lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost text-2xl"
+            >
+              <HiOutlineMenuAlt3 />
+            </div>
+
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-4 z-[100] p-4 shadow-xl bg-white rounded-2xl w-60 space-y-2"
+            >
+              {navLinks}
+            </ul>
           </div>
-          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+
+          {/* Logo */}
+          <Link
+            href="/"
+            className="text-3xl font-black tracking-tight"
+          >
+            <span className="text-[#244d3f]">Luxe</span>
+            <span className="text-base-content">Tile</span>
+          </Link>
+        </div>
+
+        {/* Center Nav */}
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal gap-2 text-[15px] font-medium">
             {navLinks}
           </ul>
         </div>
-        <Link href="/" className="btn btn-ghost text-2xl font-extrabold text-primary tracking-wide">
-          LuxeTile<span className="text-base-content">.</span>
-        </Link>
-      </div>
 
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-2 text-base">
-          {navLinks}
-        </ul>
-      </div>
+        {/* Right */}
+        <div className="navbar-end">
+          {isLoggedIn ? (
+            <div className="flex items-center gap-4">
 
-      <div className="navbar-end">
-        {isLoggedIn ? (
-          <div className="flex items-center gap-4">
-            <Link href="/my-profile" className="avatar hover:opacity-80 transition-opacity">
-              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="User Avatar" />
-              </div>
+              {/* Avatar */}
+              <Link
+                href="/my-profile"
+                className="hover:scale-105 transition duration-300"
+              >
+                <div className="avatar">
+                  <div className="w-11 rounded-full ring-2 ring-[#244d3f] ring-offset-2">
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      alt="User"
+                    />
+                  </div>
+                </div>
+              </Link>
+
+              {/* Logout Button */}
+              <button className="btn bg-red-500 hover:bg-red-600 text-white border-none rounded-full px-6">
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="btn bg-[#244d3f] hover:bg-[#1d4034] text-white border-none rounded-full px-8 shadow-md"
+            >
+              Login
             </Link>
-            <button className="btn btn-error btn-sm hidden sm:flex">Logout</button>
-          </div>
-        ) : (
-          <Link href="/login" className="btn btn-primary px-8">Login</Link>
-        )}
+          )}
+        </div>
       </div>
-      
     </div>
   );
 }

@@ -1,89 +1,109 @@
 import Link from "next/link";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-neutral text-neutral-content mt-auto">
+    <footer className="bg-[#244d3f] text-white mt-auto border-t border-white/10">
+      
+      <div className="container mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-3 gap-12">
 
-      <div className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
-
+        {/* Brand Section */}
         <div>
           <Link
             href="/"
-            className="text-3xl font-extrabold text-primary block mb-3"
+            className="text-4xl font-extrabold tracking-tight text-white block mb-4"
           >
             LuxeTile.
           </Link>
 
-          <p className="text-sm opacity-80 leading-relaxed">
-            Premium Tile Gallery & Co. Elevate your space with curated
-            aesthetic tile collections designed for modern living.
+          <p className="text-sm text-white/70 leading-relaxed max-w-sm">
+            Premium Tile Gallery & Co. Elevate your interiors with elegant,
+            modern, and timeless tile collections crafted for luxurious living.
           </p>
         </div>
 
+        {/* Contact Section */}
         <div>
-          <h3 className="text-primary font-semibold mb-4">Contact</h3>
+          <h3 className="text-xl font-semibold mb-5 text-white">
+            Contact
+          </h3>
 
-          <div className="space-y-2 text-sm opacity-80">
+          <div className="space-y-3 text-sm text-white/70">
             <p>📍 Kuril, Dhaka, Bangladesh</p>
 
-            <p><a href="mailto:support@luxetile.com" className="hover:text-primary">
+            <a
+              href="mailto:support@luxetile.com"
+              className="block hover:text-white transition duration-300"
+            >
               ✉ support@luxetile.com
-            </a> 
-            </p>
+            </a>
 
-            <a href="tel:+8801234567890" className="hover:text-primary">
+            <a
+              href="tel:+8801234567890"
+              className="block hover:text-white transition duration-300"
+            >
               📞 +880 1234 567890
             </a>
           </div>
         </div>
 
+        {/* Social Section */}
         <div>
-          <h3 className="text-primary font-semibold mb-4">Follow Us</h3>
+          <h3 className="text-xl font-semibold mb-5 text-white">
+            Follow Us
+          </h3>
 
-          <p className="text-sm opacity-80 mb-4">
-            Stay connected for latest designs & inspirations.
+          <p className="text-sm text-white/70 mb-5">
+            Get inspired with our latest tile trends and interior ideas.
           </p>
 
-          <div className="flex gap-5 text-2xl">
+          <div className="flex items-center gap-4">
 
             <a
               href="https://facebook.com"
-              className="hover:text-primary transition-transform hover:scale-110"
+              target="_blank"
+              className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#244d3f] transition-all duration-300"
             >
-              <FaFacebook />
+              <FaFacebookF />
             </a>
 
             <a
               href="https://instagram.com"
-              className="hover:text-primary transition-transform hover:scale-110"
+              target="_blank"
+              className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#244d3f] transition-all duration-300"
             >
               <FaInstagram />
             </a>
 
             <a
               href="https://twitter.com"
-              className="hover:text-primary transition-transform hover:scale-110"
+              target="_blank"
+              className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#244d3f] transition-all duration-300"
             >
               <FaTwitter />
             </a>
 
             <a
               href="https://linkedin.com"
-              className="hover:text-primary transition-transform hover:scale-110"
+              target="_blank"
+              className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#244d3f] transition-all duration-300"
             >
-              <FaLinkedin />
+              <FaLinkedinIn />
             </a>
 
           </div>
         </div>
-
       </div>
 
-      <div className="bg-base-300 text-center py-4 text-sm">
+      {/* Bottom Bar */}
+      <div className="border-t border-white/10 py-5 text-center text-sm text-white/60">
         © 2026 LuxeTile. All rights reserved.
       </div>
-
     </footer>
   );
 }

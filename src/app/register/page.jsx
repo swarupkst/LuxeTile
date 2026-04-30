@@ -63,7 +63,7 @@ export default function RegisterPage() {
               />
             </div>
 
-            <button className="btn btn-primary w-full mt-2">
+            <button className="btn bg-[#19815f] w-full mt-2 text-white hover:">
               Register
             </button>
 

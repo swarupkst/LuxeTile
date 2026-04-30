@@ -84,7 +84,7 @@ export default function UpdateProfilePage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="btn btn-primary w-full"
+            className="btn bg-[#19815f] w-full text-white"
           >
             {isLoading ? "Updating..." : "Update Profile"}
           </button>

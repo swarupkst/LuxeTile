@@ -49,7 +49,7 @@ export default function LoginPage() {
                             </a>
                         </div>
 
-                        <button className="btn btn-primary w-full">
+                        <button className="btn bg-[#19815f] text-white w-full">
                             Login
                         </button>
 
