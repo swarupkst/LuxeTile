@@ -55,7 +55,7 @@ export default async function SingleTilePage({ params }) {
 
           <div>
             <div className="flex gap-2 mb-2">
-              <span className="badge badge-primary">{tile.category}</span>
+              <span className="badge badge-success font-semibold">{tile.category}</span>
               <span className="badge badge-outline">{tile.style}</span>
             </div>
 
@@ -100,7 +100,7 @@ export default async function SingleTilePage({ params }) {
 
           <div className="flex gap-3">
             <button
-              className="btn btn-primary flex-1"
+              className="btn bg-[#19815f] text-white flex-1"
               disabled={!tile.inStock}
             >
               Add to Cart

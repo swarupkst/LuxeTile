@@ -46,7 +46,7 @@ export default async function HomePage() {
             Discover Your <br/><span className="text-[#0f9468] text-4xl md:text-6xl">Perfect Aesthetic</span>
           </h1>
 
-          <p className="mb-8 text-lg text-gray-200">
+          <p className="mb-8 text-xl text-gray-200">
             Elevate your spaces with our premium collection of tiles.
             From modern geometric patterns to classic marble finishes,
             find exactly what your home needs.
@@ -54,7 +54,7 @@ export default async function HomePage() {
 
           <Link
             href="/all-tiles"
-            className="btn rounded-e-md bg-[#0f9468] btn-lg shadow-lg hover:scale-105 transition-transform text-gray-300 border-none"
+            className="btn rounded-e-md bg-[#0f9468] btn-lg shadow-lg hover:scale-105 transition-transform text-gray-100 border-none"
           >
             Browse Now
           </Link>
@@ -92,7 +92,7 @@ export default async function HomePage() {
                   alt={tile.title} 
                   className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" 
                 />
-                <div className="absolute top-4 left-4 badge badge-primary">{tile.category}</div>
+                <div className="absolute top-4 left-4 badge badge-success">{tile.category}</div>
               </figure>
               
               <div className="card-body">
@@ -100,7 +100,7 @@ export default async function HomePage() {
                 <p className="text-2xl font-semibold text-primary mt-2">${tile.price}</p>
                 
                 <div className="card-actions justify-end mt-6">
-                  <Link href={`/tile/${tile.id}`} className="btn btn-outline btn-primary w-full">
+                  <Link href={`/tile/${tile.id}`} className="btn btn-outline btn-success w-full">
                     View Details
                   </Link>
                 </div>

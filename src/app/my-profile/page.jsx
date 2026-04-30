@@ -27,7 +27,7 @@ export default function MyProfilePage() {
           <p className="text-sm text-gray-500">{user.email}</p>
 
           <div className="flex gap-2 mt-3">
-            <span className="badge badge-primary">{user.role}</span>
+            <span className="badge badge-success font-semibold">{user.role}</span>
             <span className="badge badge-outline">Joined {user.joined}</span>
           </div>
         </div>

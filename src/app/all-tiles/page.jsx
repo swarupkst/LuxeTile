@@ -35,7 +35,7 @@ export default function AllTilesPage() {
             placeholder="Search tiles..."
             className="input input-bordered w-full rounded-r-none"
           />
-          <button className="btn btn-primary rounded-l-none px-6">
+          <button className="btn  bg-[#19815f] text-white rounded-l-none px-6">
             Search
           </button>
         </div>
@@ -59,7 +59,7 @@ export default function AllTilesPage() {
                 className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
               />
 
-              <span className="absolute top-3 left-3 badge badge-primary capitalize">
+              <span className="absolute top-3 left-3 badge badge-success font-semibold capitalize">
                 {tile.category}
               </span>
             </div>
@@ -72,7 +72,7 @@ export default function AllTilesPage() {
 
               <Link
                 href={`/tile/${tile.id}`}
-                className="btn btn-outline btn-primary w-full mt-4"
+                className="btn bg-[#19815f] text-white w-full mt-4"
               >
                 View Details
               </Link>
