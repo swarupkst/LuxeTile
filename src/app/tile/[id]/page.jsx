@@ -3,12 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-
-// Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-
-// Swiper CSS
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -55,7 +51,7 @@ export default function SingleTilePage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        Loading...
+        <span className="loading loading-dots loading-xl"></span>
       </div>
     );
   }
