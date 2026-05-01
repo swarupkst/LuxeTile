@@ -24,7 +24,7 @@ export default function SingleTilePage() {
       try {
 
         const res = await fetch(
-          `http://localhost:3004/products/${id}`
+          `https://luxetile-server.onrender.com/products/${id}`
         );
 
         const data = await res.json();

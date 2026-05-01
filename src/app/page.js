@@ -17,7 +17,7 @@ export default function HomePage() {
 
       try {
 
-        const res = await fetch("http://localhost:3004/products");
+        const res = await fetch("https://luxetile-server.onrender.com/products");
         const data = await res.json();
 
         setFeaturedTiles(data.slice(0, 4));
