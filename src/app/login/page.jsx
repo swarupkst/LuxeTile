@@ -1,7 +1,9 @@
 'use client'
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 // export const metadata = {
@@ -11,19 +13,24 @@ import { FcGoogle } from "react-icons/fc";
 
 export default function LoginPage() {
 
-    const {register, handleSubmit, formState: {errors}} = useForm()
+    const handleGoogleSignIn = async () => {
+    const data = await authClient.signIn.social({
+    provider: "google",
+  });
+}
+
+    const [isShowPassword, setIsShowPassword] = useState(false)
+    const { register, handleSubmit, formState: { errors } } = useForm()
 
     const handleLoginFunc = async (data) => {
 
-        console.log (data ,"data")
-        console.log (errors ,"errors")
 
         const { data: res, error } = await authClient.signIn.email({
-    email: data.email, // required
-    password: data.password, // required
-    // rememberMe: true,
-    callbackURL: "/",
-});
+            email: data.email, // required
+            password: data.password, // required
+            // rememberMe: true,
+            callbackURL: "/",
+        });
     }
     return (
         <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
@@ -47,21 +54,35 @@ export default function LoginPage() {
                                 type="email"
                                 placeholder="email@example.com"
                                 className="input input-bordered w-full mt-1"
-                                {...register("email", {required: "Email is required"})}
+                                {...register("email", { required: "Email is required" })}
                             />
                             {errors.email && <p className="text-red-700">{errors.email.message}</p>}
                         </div>
 
-                        <div>
+                        <div className="relative">
                             <label className="label-text">Password</label>
+
                             <input
-                                type="password"
+                                type={isShowPassword ? "text" : "password"}
                                 placeholder="••••••••"
-                                className="input input-bordered w-full mt-1"
-                                
-                                {...register("password", {required: "Password cann't be Empty"})}
+                                className="input input-bordered w-full mt-1 pr-10"
+                                {...register("password", {
+                                    required: "Password can't be Empty",
+                                })}
                             />
-                            {errors.password && <p className="text-red-700">{errors.password.message}</p>}
+
+                            <span
+                                className="absolute right-3 top-11 cursor-pointer"
+                                onClick={() => setIsShowPassword(!isShowPassword)}
+                            >
+                                {isShowPassword ? <FaEye /> : <FaEyeSlash />}
+                            </span>
+
+                            {errors.password && (
+                                <p className="text-red-700">
+                                    {errors.password.message}
+                                </p>
+                            )}
                         </div>
 
                         <div className="text-right text-sm">
@@ -79,6 +100,7 @@ export default function LoginPage() {
                         <button
                             type="button"
                             className="btn btn-outline w-full flex items-center gap-2"
+                            onClick={handleGoogleSignIn}
                         >
                             <FcGoogle className="text-xl" />
                             Continue with Google

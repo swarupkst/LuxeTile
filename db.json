@@ -1,0 +1,132 @@
+{
+    "products": [
+  {
+    "id": "tile_001",
+    "title": "Ceramic Blue Tile",
+    "description": "Premium ceramic tile with glossy blue finish",
+    "images": [
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=80"
+    ],
+    "category": "ceramic",
+    "price": 45.99,
+    "currency": "USD",
+    "dimensions": "60x60 cm",
+    "material": "Ceramic",
+    "inStock": true
+  },
+  {
+    "id": "tile_002",
+    "title": "Modern Marble Tile",
+    "description": "Luxury marble-style porcelain tile for modern interiors",
+    "images": [
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=800&q=80"
+    ],
+    "category": "porcelain",
+    "price": 62.50,
+    "currency": "USD",
+    "dimensions": "80x80 cm",
+    "material": "Porcelain",
+    "inStock": true
+  },
+  {
+    "id": "tile_003",
+    "title": "Wood Look Floor Tile",
+    "description": "Natural wood-texture ceramic tile with matte finish",
+    "images": [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80"
+    ],
+    "category": "wood-look",
+    "price": 39.99,
+    "currency": "USD",
+    "dimensions": "20x120 cm",
+    "material": "Ceramic",
+    "inStock": true
+  },
+  {
+    "id": "tile_004",
+    "title": "Elegant White Wall Tile",
+    "description": "Minimal white subway tile for kitchens and bathrooms",
+    "images": [
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600210491369-e753d80a41f3?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&q=80"
+    ],
+    "category": "wall",
+    "price": 29.99,
+    "currency": "USD",
+    "dimensions": "30x60 cm",
+    "material": "Ceramic",
+    "inStock": false
+  },
+  {
+    "id": "tile_005",
+    "title": "Black Stone Tile",
+    "description": "Dark stone-inspired tile with textured surface",
+    "images": [
+      "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600566752227-8f3b5f4c38cf?auto=format&fit=crop&w=800&q=80"
+    ],
+    "category": "stone",
+    "price": 74.99,
+    "currency": "USD",
+    "dimensions": "60x120 cm",
+    "material": "Porcelain",
+    "inStock": true
+  },
+  {
+    "id": "tile_006",
+    "title": "Pattern Mosaic Tile",
+    "description": "Decorative mosaic tile with geometric patterns",
+    "images": [
+      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600047509782-20d39509f26d?auto=format&fit=crop&w=800&q=80"
+    ],
+    "category": "mosaic",
+    "price": 54.25,
+    "currency": "USD",
+    "dimensions": "40x40 cm",
+    "material": "Ceramic",
+    "inStock": true
+  },
+  {
+    "id": "tile_007",
+    "title": "Grey Concrete Tile",
+    "description": "Industrial-style concrete look tile with matte texture",
+    "images": [
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600210491369-e753d80a41f3?auto=format&fit=crop&w=800&q=80"
+    ],
+    "category": "concrete",
+    "price": 48.75,
+    "currency": "USD",
+    "dimensions": "75x75 cm",
+    "material": "Porcelain",
+    "inStock": true
+  },
+  {
+    "id": "tile_008",
+    "title": "Glossy Beige Tile",
+    "description": "Premium glossy beige tile perfect for luxury interiors",
+    "images": [
+      "https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=800&q=80"
+    ],
+    "category": "ceramic",
+    "price": 52.00,
+    "currency": "USD",
+    "dimensions": "60x60 cm",
+    "material": "Ceramic",
+    "inStock": false
+  }
+]
+}

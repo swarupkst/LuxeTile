@@ -1,45 +1,53 @@
 'use client'
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 // export const metadata = {
 //   title: "Register for LuxeTile",
 //   description: "Register to continue exploring LuxeTile",
 // };
 
 export default function RegisterPage() {
-  
-  const {register, handleSubmit, formState: {errors}} = useForm()
-  
-      const handleLoginFunc = async (data) => {
-        const {name, email, url, password}=data;
-          console.log (data ,"data")
-          console.log (errors ,"errors")
 
-        const {data: res, error} = await authClient.signUp.email({
+  const handleGoogleSignIn = async () => {
+    const data = await authClient.signIn.social({
+    provider: "google",
+  });
+  }
+
+  const [isShowPassword, setIsShowPassword] = useState(false)
+  const { register, handleSubmit, formState: { errors } } = useForm()
+
+  const handleLoginFunc = async (data) => {
+    const { name, email, url, password } = data;
+    console.log(data, "data")
+    console.log(errors, "errors")
+
+    const { data: res, error } = await authClient.signUp.email({
       name: name, // required
       email: email, // required
       password: password, // required
       image: url,
       callbackURL: "/",
-        })
-        console.log(res)
-        console.log(error);
-        if(error) {
-          alert (error.message)
-        }
-        if(res) {
-          alert ("Signup Successfull")
-        }
-      };
+    })
+    console.log(res)
+    console.log(error);
+    if (error) {
+      alert(error.message)
+    }
+    if (res) {
+      alert("Signup Successfull")
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
-      
+
       <div className="w-full max-w-md">
-        
+
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold">Create an Account</h1>
           <p className="text-sm text-gray-500 mt-2">
@@ -48,19 +56,19 @@ export default function RegisterPage() {
         </div>
 
         <div className="bg-base-100 shadow-xl rounded-2xl p-6">
-          
-          <form className="space-y-4"onSubmit={handleSubmit(handleLoginFunc)}>
-            
+
+          <form className="space-y-4" onSubmit={handleSubmit(handleLoginFunc)}>
+
             <div>
               <label className="label-text">Full Name</label>
               <input
                 type="text"
                 placeholder="Swarup Biswas"
                 className="input input-bordered w-full mt-1"
-                {...register("name", {required: "Name is required"})}
-                            />
-                            {errors.name && <p className="text-red-700">{errors.name.message}</p>}
-              
+                {...register("name", { required: "Name is required" })}
+              />
+              {errors.name && <p className="text-red-700">{errors.name.message}</p>}
+
             </div>
 
             <div>
@@ -69,9 +77,9 @@ export default function RegisterPage() {
                 type="url"
                 placeholder="https://example.com/photo.jpg"
                 className="input input-bordered w-full mt-1"
-                {...register("url", {required: "Photo URL is required"})}
-                            />
-                            {errors.url && <p className="text-red-700">{errors.url.message}</p>}
+                {...register("url", { required: "Photo URL is required" })}
+              />
+              {errors.url && <p className="text-red-700">{errors.url.message}</p>}
             </div>
 
             <div>
@@ -80,21 +88,36 @@ export default function RegisterPage() {
                 type="email"
                 placeholder="email@example.com"
                 className="input input-bordered w-full mt-1"
-                {...register("email", {required: "Email is required"})}
-                            />
-                            {errors.email && <p className="text-red-700">{errors.email.message}</p>}
+                {...register("email", { required: "Email is required" })}
+              />
+              {errors.email && <p className="text-red-700">{errors.email.message}</p>}
             </div>
 
-            <div>
-              <label className="label-text">Password</label>
-              <input
-                type="password"
-                placeholder="********"
-                className="input input-bordered w-full mt-1"
-              {...register("password", {required: "Password cann't be Empty"})}
-                            />
-                            {errors.password && <p className="text-red-700">{errors.password.message}</p>}
-            </div>
+            <div className="relative">
+  <label className="label-text">Password</label>
+
+  <input
+    type={isShowPassword ? "text" : "password"}
+    placeholder="********"
+    className="input input-bordered w-full mt-1 pr-10"
+    {...register("password", {
+      required: "Password can't be Empty",
+    })}
+  />
+
+  <span
+  className="absolute right-3 top-11 cursor-pointer"
+  onClick={() => setIsShowPassword(!isShowPassword)}
+>
+  {isShowPassword ? <FaEye /> : <FaEyeSlash />}
+</span>
+
+  {errors.password && (
+    <p className="text-red-700">
+      {errors.password.message}
+    </p>
+  )}
+</div>
 
             <button className="btn bg-[#19815f] w-full mt-2 text-white hover:">
               Register
@@ -105,6 +128,7 @@ export default function RegisterPage() {
             <button
               type="button"
               className="btn btn-outline w-full flex items-center gap-2"
+              onClick={handleGoogleSignIn}
             >
               <FcGoogle className="text-xl" />
               Continue with Google

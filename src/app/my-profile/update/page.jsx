@@ -1,30 +1,58 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function UpdateProfilePage() {
   const router = useRouter();
 
-  const [name, setName] = useState("John Doe");
-  const [imageUrl, setImageUrl] = useState(
-    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-  );
+  const { data: session } = authClient.useSession();
+
+  const [name, setName] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [imgError, setImgError] = useState(false);
 
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    if (session?.user) {
+      setName(session.user.name || "");
+      setImageUrl(session.user.image || "");
+    }
+  }, [session]);
+
   const handleUpdate = async (e) => {
     e.preventDefault();
+
     setIsLoading(true);
+    setSuccessMessage("");
+    setErrorMessage("");
 
     try {
-      await new Promise((r) => setTimeout(r, 1000));
+      const { data, error } = await authClient.updateUser({
+        name: name,
+        image: imageUrl,
+      });
 
-      router.push("/my-profile");
-      router.refresh();
+      if (error) {
+        setErrorMessage(error.message);
+        return;
+      }
+
+      setSuccessMessage("Profile Updated Successfully");
+
+      setTimeout(() => {
+        router.push("/my-profile");
+        router.refresh();
+      }, 1500);
+
     } catch (error) {
       console.error(error);
+      setErrorMessage("Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -32,9 +60,7 @@ export default function UpdateProfilePage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
-
       <div className="w-full max-w-md bg-base-100 shadow-xl rounded-2xl p-6">
-
         <h2 className="text-2xl font-bold text-center mb-6">
           Update Profile
         </h2>
@@ -43,6 +69,7 @@ export default function UpdateProfilePage() {
 
           <div>
             <label className="text-sm">Name</label>
+
             <input
               type="text"
               value={name}
@@ -54,6 +81,7 @@ export default function UpdateProfilePage() {
 
           <div>
             <label className="text-sm">Profile Image URL</label>
+
             <input
               type="url"
               value={imageUrl}
@@ -67,7 +95,7 @@ export default function UpdateProfilePage() {
           </div>
 
           <div className="flex justify-center mt-2">
-            {!imgError ? (
+            {imageUrl && !imgError ? (
               <img
                 src={imageUrl}
                 alt="preview"
@@ -80,6 +108,18 @@ export default function UpdateProfilePage() {
               </div>
             )}
           </div>
+
+          {successMessage && (
+            <p className="text-green-600 text-sm text-center font-medium">
+              {successMessage}
+            </p>
+          )}
+
+          {errorMessage && (
+            <p className="text-red-600 text-sm text-center font-medium">
+              {errorMessage}
+            </p>
+          )}
 
           <button
             type="submit"
