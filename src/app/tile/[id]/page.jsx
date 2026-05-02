@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -14,8 +17,23 @@ export default function SingleTilePage() {
   const params = useParams();
   const id = params.id;
 
+  const router = useRouter();
+
+  // Authentication
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+
   const [tile, setTile] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // Redirect if not logged in
+  useEffect(() => {
+
+    if (!isPending && !user) {
+      router.replace("/login");
+    }
+
+  }, [isPending, user, router]);
 
   useEffect(() => {
 
@@ -42,12 +60,22 @@ export default function SingleTilePage() {
       }
     };
 
-    if (id) {
+    if (id && user) {
       fetchTile();
     }
 
-  }, [id]);
+  }, [id, user]);
 
+  // Auth Loading
+  if (isPending || !user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <span className="loading loading-dots loading-xl"></span>
+      </div>
+    );
+  }
+
+  // Data Loading
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
