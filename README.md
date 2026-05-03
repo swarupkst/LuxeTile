@@ -138,7 +138,6 @@ The website is optimized for:
 
 ---
 
-## 👨‍💻 Developer
 
 ## 👨‍💻 Developer
 
